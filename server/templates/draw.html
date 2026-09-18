@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Draw — E-Ink AI{% endblock %}
+{% block nav_draw %}active{% endblock %}
+{% block content %}
+<div class="panel">
+  <h1>Draw</h1>
+  <p class="muted">Sketch at the panel's native 648×480, then push it straight to the display.</p>
+  <canvas id="pad" width="648" height="480"></canvas>
+  <div class="draw-controls">
+    <label>Brush <input id="brush" type="range" min="1" max="40" value="6"></label>
+    <button id="clear" class="ghost">Clear</button>
+    <button id="push" class="primary">Push to display</button>
+    <span id="draw-status" class="muted"></span>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="/static/draw.js"></script>{% endblock %}

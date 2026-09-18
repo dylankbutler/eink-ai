@@ -1,10 +1,10 @@
+# Mac-side orchestrator + web app
 flask
 pillow
 requests
 pyyaml
 anthropic
-zeroconf  # mDNS device discovery
+replicate
+zeroconf        # mDNS device discovery
 
-# Pi-only (uncomment when deploying)
-# RPi.GPIO
-# spidev
+# The Pi display agent has its own deps — see agent/requirements.txt

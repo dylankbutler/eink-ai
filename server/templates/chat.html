@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Chat — E-Ink AI{% endblock %}
+{% block nav_chat %}active{% endblock %}
+{% block content %}
+<div class="chat-wrap">
+  <div id="messages" class="messages">
+    <div class="msg assistant">
+      <div class="bubble">Describe something and I'll generate it for your e-ink display. Try "a lighthouse at night in a storm".</div>
+    </div>
+  </div>
+  <form id="chat-form" class="composer">
+    <input id="chat-input" type="text" autocomplete="off" placeholder="Describe an image…" />
+    <button type="submit">Send</button>
+  </form>
+</div>
+{% endblock %}
+{% block scripts %}<script src="/static/chat.js"></script>{% endblock %}

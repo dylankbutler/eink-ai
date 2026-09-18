@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Devices — E-Ink AI{% endblock %}
+{% block nav_devices %}active{% endblock %}
+{% block content %}
+<div class="panel">
+  <h1>Displays</h1>
+  <p class="muted">Pis discovered on your network. The active one receives pushed images.</p>
+  <ul id="device-list" class="device-list"><li class="muted">Scanning…</li></ul>
+  <button id="refresh" class="ghost">Refresh</button>
+</div>
+{% endblock %}
+{% block scripts %}<script src="/static/devices.js"></script>{% endblock %}

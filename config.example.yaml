@@ -1,23 +1,21 @@
-# Copy to config.yaml and fill in your values
-# config.yaml is git-ignored
-
-device:
-  profile: waveshare_5in83_v2
-  # Hostname or IP of the Pi running InkyPi
-  # If using mDNS: inkypi.local
-  host: inkypi.local
-  port: 5000
+# Copy to config.yaml and fill in your keys. config.yaml is git-ignored.
+# Secrets can also be supplied via env vars (ANTHROPIC_API_KEY, REPLICATE_API_TOKEN),
+# which take precedence over values here.
 
 llm:
-  # Anthropic API key for Claude (chat + tool orchestration)
-  anthropic_api_key: ""
+  anthropic_api_key: ""          # Claude — chat loop + tool calling
   model: claude-sonnet-4-6
 
-  # Image generation backend (TBD — fill in Phase 2)
-  image_gen:
-    provider: ""  # e.g. "replicate", "openai"
-    api_key: ""
+image_gen:
+  provider: replicate
+  replicate_api_token: ""        # https://replicate.com/account/api-tokens
+  model: black-forest-labs/flux-schnell
 
-integrations:
-  google_calendar:
-    credentials_file: ""  # path to OAuth credentials JSON
+device:
+  discovery: mdns                # discovers _einkdisplay._tcp on the LAN
+  fallback_host: koipond.local   # used if mDNS is flaky (e.g. phone hotspot)
+  fallback_port: 8080
+
+render:
+  resolution: [648, 480]
+  dither: floyd-steinberg        # or "threshold" for graphic/line-art prompts

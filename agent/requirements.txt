@@ -1,0 +1,5 @@
+flask
+pillow
+zeroconf
+# Waveshare EPD library is installed separately from the waveshare/e-Paper repo
+# (see agent/setup.sh) — it is not on PyPI. It also pulls in RPi.GPIO + spidev.

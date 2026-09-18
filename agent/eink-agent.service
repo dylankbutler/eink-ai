@@ -1,0 +1,20 @@
+[Unit]
+Description=E-Ink Display Agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=dylanbutler
+WorkingDirectory=/home/dylanbutler/eink-ai
+Environment=EINK_DEVICE_ID=koipond
+Environment=EINK_DEVICE_NAME=Koi Pond E-Ink
+Environment=EINK_AGENT_PORT=8080
+ExecStart=/usr/bin/python3 -m agent.app
+Restart=on-failure
+RestartSec=15
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
