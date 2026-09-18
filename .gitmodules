@@ -1,0 +1,3 @@
+[submodule "inkypi"]
+	path = inkypi
+	url = https://github.com/fatihak/InkyPi

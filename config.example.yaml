@@ -1,0 +1,23 @@
+# Copy to config.yaml and fill in your values
+# config.yaml is git-ignored
+
+device:
+  profile: waveshare_5in83_v2
+  # Hostname or IP of the Pi running InkyPi
+  # If using mDNS: inkypi.local
+  host: inkypi.local
+  port: 5000
+
+llm:
+  # Anthropic API key for Claude (chat + tool orchestration)
+  anthropic_api_key: ""
+  model: claude-sonnet-4-6
+
+  # Image generation backend (TBD — fill in Phase 2)
+  image_gen:
+    provider: ""  # e.g. "replicate", "openai"
+    api_key: ""
+
+integrations:
+  google_calendar:
+    credentials_file: ""  # path to OAuth credentials JSON

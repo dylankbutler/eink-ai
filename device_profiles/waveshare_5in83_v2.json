@@ -1,0 +1,16 @@
+{
+  "device_id": "waveshare_5in83_v2",
+  "name": "Waveshare 5.83\" e-Paper V2",
+  "resolution": [648, 480],
+  "color_mode": "1bit",
+  "refresh": {
+    "full_refresh_seconds": null,
+    "partial_refresh_seconds": null,
+    "supports_partial": true,
+    "_note": "Timing values are placeholders — measure empirically on hardware"
+  },
+  "animation": {
+    "max_frames": 12,
+    "max_update_regions": 4
+  }
+}

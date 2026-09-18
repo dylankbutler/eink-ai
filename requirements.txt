@@ -1,0 +1,10 @@
+flask
+pillow
+requests
+pyyaml
+anthropic
+zeroconf  # mDNS device discovery
+
+# Pi-only (uncomment when deploying)
+# RPi.GPIO
+# spidev

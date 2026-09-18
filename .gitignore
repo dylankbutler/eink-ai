@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.env
+*.env
+
+# Config with secrets
+config.yaml
+
+# Output/cache
+output.png
+*.png
+*.gif
+__pycache__
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
