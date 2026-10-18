@@ -9,7 +9,16 @@ import base64
 import io
 import logging
 
-from flask import Flask, jsonify, request, render_template, send_file
+from flask import (
+    Flask,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    send_file,
+    session,
+    url_for,
+)
 from PIL import Image
 
 from server.config import Config
@@ -23,6 +32,7 @@ logger = logging.getLogger("eink-server")
 app = Flask(__name__)
 
 config = Config.load()
+app.secret_key = "eink-ai-gate-" + (config.auth.password or "dev")
 image_store = {}  # image_id -> {"image", "preview", "prompt"}
 orchestrator = Orchestrator(config, image_store)
 registry = devices_mod.DeviceRegistry(
@@ -30,6 +40,39 @@ registry = devices_mod.DeviceRegistry(
     fallback_port=config.device.fallback_port,
 )
 registry.start_discovery()
+
+
+# ---- auth gate ----
+# A single shared password keeps strangers from burning the image-gen credits.
+# No password configured => open (e.g. local dev).
+
+@app.before_request
+def _require_login():
+    if not config.auth.password:
+        return
+    if request.endpoint == "login" or (request.path or "").startswith("/static"):
+        return
+    if session.get("authed"):
+        return
+    if request.path.startswith("/api/"):
+        return jsonify(error="unauthorized"), 401
+    return redirect(url_for("login"))
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        if config.auth.password and (request.form.get("password") or "") == config.auth.password:
+            session["authed"] = True
+            return redirect(url_for("index"))
+        return render_template("login.html", error="Incorrect password."), 401
+    return render_template("login.html", error=None)
+
+
+@app.get("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("login"))
 
 
 # ---- pages ----

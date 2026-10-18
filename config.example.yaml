@@ -19,3 +19,6 @@ device:
 render:
   resolution: [648, 480]
   dither: floyd-steinberg        # or "threshold" for graphic/line-art prompts
+
+auth:
+  password: ""                   # gate the web UI (empty => no gate). Or set EINK_PASSWORD.

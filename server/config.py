@@ -40,11 +40,17 @@ class RenderConfig:
 
 
 @dataclass
+class AuthConfig:
+    password: str = ""  # empty => no gate
+
+
+@dataclass
 class Config:
     llm: LLMConfig = field(default_factory=LLMConfig)
     image_gen: ImageGenConfig = field(default_factory=ImageGenConfig)
     device: DeviceConfig = field(default_factory=DeviceConfig)
     render: RenderConfig = field(default_factory=RenderConfig)
+    auth: AuthConfig = field(default_factory=AuthConfig)
 
     @classmethod
     def load(cls) -> "Config":
@@ -57,6 +63,7 @@ class Config:
         image_gen = data.get("image_gen", {})
         device = data.get("device", {})
         render = data.get("render", {})
+        auth = data.get("auth", {})
 
         res = render.get("resolution", [648, 480])
 
@@ -78,5 +85,8 @@ class Config:
             render=RenderConfig(
                 resolution=(int(res[0]), int(res[1])),
                 dither=render.get("dither", "floyd-steinberg"),
+            ),
+            auth=AuthConfig(
+                password=os.environ.get("EINK_PASSWORD") or auth.get("password", ""),
             ),
         )
